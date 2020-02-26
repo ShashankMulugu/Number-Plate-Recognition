@@ -42,7 +42,7 @@ def loadKNNDataAndTrainKNN():
     try:
         npaClassifications = np.loadtxt("classifications.txt", np.float32)
     except:
-        print "error, unable to open classifications.txt, exiting program\n"
+        print ("error, unable to open classifications.txt, exiting program\n")
         os.system("pause")
         return False
 
@@ -50,7 +50,7 @@ def loadKNNDataAndTrainKNN():
     try:
         npaFlattenedImages = np.loadtxt("flattened_images.txt", np.float32)
     except:
-        print "error, unable to open flattened_images.txt, exiting program\n"
+        print ("error, unable to open flattened_images.txt, exiting program\n")
         os.system("pause")
         return False
 
@@ -125,7 +125,7 @@ def detectCharsInPlates(listOfPossiblePlates):
         if (len(listOfListsOfMatchingCharsInPlate) == 0):
 
             if Main.showSteps == True:
-                print "chars found in plate number " + str(intPlateCounter) + " = (none), click on any image and press a key to continue . . ."
+                print ("chars found in plate number " + str(intPlateCounter) + " = (none), click on any image and press a key to continue . . .")
                 intPlateCounter = intPlateCounter + 1
                 cv2.destroyWindow("8")
                 cv2.destroyWindow("9")
@@ -192,12 +192,12 @@ def detectCharsInPlates(listOfPossiblePlates):
         possiblePlate.strChars = recognizeCharsInPlate(possiblePlate.imgThresh, longestListOfMatchingCharsInPlate)
 
         if Main.showSteps == True:
-            print "chars found in plate number " + str(intPlateCounter) + " = " + possiblePlate.strChars + ", click on any image and press a key to continue . . ."
+            print ("chars found in plate number " + str(intPlateCounter) + " = " + possiblePlate.strChars + ", click on any image and press a key to continue . . .")
             intPlateCounter = intPlateCounter + 1
             cv2.waitKey(0)
 
     if Main.showSteps == True:
-        print "\nchar detection complete, click on any image and press a key to continue . . .\n"
+        print ("\nchar detection complete, click on any image and press a key to continue . . .\n")
         cv2.waitKey(0)
 
     return listOfPossiblePlates
@@ -209,7 +209,7 @@ def findPossibleCharsInPlate(imgGrayscale, imgThresh):
     imgThreshCopy = imgThresh.copy()
 
 
-    imgContours, contours, npaHierarchy = cv2.findContours(imgThreshCopy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    contours, npaHierarchy = cv2.findContours(imgThreshCopy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
         possibleChar = PossibleChar.PossibleChar(contour)
