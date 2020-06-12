@@ -36,7 +36,7 @@ def detectPlatesInScene(imgOriginalScene):
     listOfPossibleCharsInScene = findPossibleCharsInScene(imgThreshScene)
 
     if Main.showSteps == True:
-        print "step 2 - len(listOfPossibleCharsInScene) = " + str(len(listOfPossibleCharsInScene))
+        print ("step 2 - len(listOfPossibleCharsInScene) = " + str(len(listOfPossibleCharsInScene)))
 
         imgContours = np.zeros((height, width, 3), np.uint8)
 
@@ -52,7 +52,7 @@ def detectPlatesInScene(imgOriginalScene):
     listOfListsOfMatchingCharsInScene = DetectChars.findListOfListsOfMatchingChars(listOfPossibleCharsInScene)
 
     if Main.showSteps == True:
-        print "step 3 - listOfListsOfMatchingCharsInScene.Count = " + str(len(listOfListsOfMatchingCharsInScene))
+        print ("step 3 - listOfListsOfMatchingCharsInScene.Count = " + str(len(listOfListsOfMatchingCharsInScene)))
 
         imgContours = np.zeros((height, width, 3), np.uint8)
 
@@ -76,10 +76,10 @@ def detectPlatesInScene(imgOriginalScene):
         if possiblePlate.imgPlate is not None:
             listOfPossiblePlates.append(possiblePlate)
 
-    print "\n" + str(len(listOfPossiblePlates)) + " possible plates found"
+    print ("\n" + str(len(listOfPossiblePlates)) + " possible plates found")
 
     if Main.showSteps == True:
-        print "\n"
+        print ("\n")
         cv2.imshow("4a", imgContours)
 
         for i in range(0, len(listOfPossiblePlates)):
@@ -92,12 +92,12 @@ def detectPlatesInScene(imgOriginalScene):
 
             cv2.imshow("4a", imgContours)
 
-            print "possible plate " + str(i) + ", click on any image and press a key to continue . . ."
+            print ("possible plate " + str(i) + ", click on any image and press a key to continue . . .")
 
             cv2.imshow("4b", listOfPossiblePlates[i].imgPlate)
             cv2.waitKey(0)
 
-        print "\nplate detection complete, click on any image and press a key to begin char recognition . . .\n"
+        print ("\nplate detection complete, click on any image and press a key to begin char recognition . . .\n")
         cv2.waitKey(0)
 
     return listOfPossiblePlates
@@ -109,7 +109,7 @@ def findPossibleCharsInScene(imgThresh):
 
     imgThreshCopy = imgThresh.copy()
 
-    imgContours, contours, npaHierarchy = cv2.findContours(imgThreshCopy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    contours, npaHierarchy = cv2.findContours(imgThreshCopy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
     height, width = imgThresh.shape
     imgContours = np.zeros((height, width, 3), np.uint8)
@@ -126,8 +126,8 @@ def findPossibleCharsInScene(imgThresh):
             listOfPossibleChars.append(possibleChar)
 
     if Main.showSteps == True:
-        print "\nstep 2 - len(contours) = " + str(len(contours))
-        print "step 2 - intCountOfPossibleChars = " + str(intCountOfPossibleChars)
+        print ("\nstep 2 - len(contours) = " + str(len(contours)))
+        print ("step 2 - intCountOfPossibleChars = " + str(intCountOfPossibleChars))
         cv2.imshow("2a", imgContours)
 
 
